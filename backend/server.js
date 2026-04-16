@@ -5,7 +5,7 @@ import cookieParser from 'cookie-parser';
 import connectDB from './configs/db.js';
 import userRouter from './routes/userRoutes.js';
 // import reviewRouter from './routes/reviewRoutes.js';
-// import listingRouter from './routes/listingRoutes.js';
+import listingRouter from './routes/listingRoutes.js';
 
 
 const app = express();
@@ -29,7 +29,7 @@ app.get('/',(req,res)=>{
     res.send("server is live....");
 })
 
-// app.use('/api/listings',listingRouter);
+app.use('/api/listings',listingRouter);
 // app.use('/api/listings/:id/reviews',reviewRouter);
 app.use('/api/auth',userRouter);
 

@@ -14,7 +14,8 @@ const Signup = () => {
       setFormData(prev => ({...prev, [name]:value}));
     }
   
-    const handleOnSubmit = async ()=>{
+    const handleOnSubmit = async (e)=>{
+      e.preventDefault();
       try {
         const {name, email,password} = formData;
         const res = await API.post('/auth/signup',{
