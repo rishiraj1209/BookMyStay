@@ -1,8 +1,10 @@
 import React from 'react'
 import { useState } from 'react'
 import API from '../api/axios';
+import { useNavigate } from 'react-router-dom';
 
 const NewListing = () => {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     title:"",
     description:"",
@@ -25,9 +27,16 @@ const NewListing = () => {
         return alert("please enter all fields");
       }
       const response = await API.post('/listings/new', formData);
-      console.log(response);
+      
+      navigate('/');
     }catch(error){
-      console.log(error.message);
+      console.log(error);
+
+      if(error.response && error.response.status === 401){
+        navigate('/login')
+      }else{
+        alert('something went wrong')
+      }
     }
   }
 

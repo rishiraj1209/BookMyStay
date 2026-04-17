@@ -1,8 +1,10 @@
 import React from 'react'
 import { useState } from 'react'
 import API from '../api/axios'
+import { useNavigate } from 'react-router-dom'
 
 const Login = () => {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     email:"",
     password:"",
@@ -22,7 +24,7 @@ const Login = () => {
         password,
       });
 
-      console.log(res.data);
+      navigate('/');
 
     } catch (error) {
       console.log(error.message);

@@ -1,6 +1,7 @@
 import React from 'react'
 import {TentTree} from 'lucide-react'
 import API from '../api/axios'
+import { Link } from 'react-router-dom'
 
 const Navbar = () => {
 
@@ -26,7 +27,8 @@ const Navbar = () => {
         />
         <button className='rounded-lg px-4 py-1 bg-red-500 text-white font-medium cursor-pointer shadow-sm shadow-black active:shadow-none active:scale-99 transition-all duration-200'>Search Listings</button>
       </div>
-      <div>
+      <div className='flex gap-10 items-center'>
+        <Link to='/newListing' className='font-medium text-white bg-red-500 rounded-md px-4 py-1 shadow-sm shadow-black active:shadow-none active:scale-95 transition-all duration-300'>Create New Listing</Link>
         <button onClick={handleLogout} className='font-medium text-red-500 cursor-pointer text-lg flex items-center text-shadow-md'>Logout</button>
       </div>
     </div>

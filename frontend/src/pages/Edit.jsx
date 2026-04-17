@@ -1,10 +1,11 @@
 import React from 'react'
 import { useEffect } from 'react';
 import { useState } from 'react'
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import API from '../api/axios';
 
 const Edit = () => {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
       title:"",
       description:"",
@@ -23,6 +24,11 @@ const Edit = () => {
         setFormData(res.data);
       } catch (error) {
         console.log(error);
+        if(error.response && error.response.status === 401){
+          navigate('/login')
+        }else{
+          alert('something went wrong');
+        }
       }
       
     }
@@ -38,10 +44,15 @@ const Edit = () => {
   const handleSubmit = async (e)=>{
     e.preventDefault();
     try {
-      const res = await API.put(`listings/${id}`,formData);
-      console.log(res);
+      const res = await API.put(`/listings/${id}`,formData);
+      navigate(`/listings/${id}`);
     } catch (error) {
       console.log(error);
+      if(error.response && error.response.status === 401){
+          navigate('/login')
+        }else{
+          alert('something went wrong');
+        }
     }
   }
 

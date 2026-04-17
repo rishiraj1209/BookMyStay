@@ -2,11 +2,12 @@ import React from 'react'
 import { useState } from 'react'
 import { useEffect } from 'react'
 import API from '../api/axios';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import StarRating from '../components/StarRating';
 import ReviewCard from '../components/ReviewCard';
 
 const Show = () => {
+  const navigate = useNavigate();
   const {id} = useParams();
   const [listing, setListing] = useState(null);
   const [rating, setRating] = useState(0);
@@ -28,9 +29,14 @@ const Show = () => {
   const handleDelete = async ()=>{
     try {
       const response = await API.delete(`/listings/${id}`);
-      console.log(response);
+      navigate('/')
     } catch (error) {
       console.log(error);
+      if(error.response && error.response.status === 401){
+        navigate(`listings/${id}`);
+      }else{
+        alert('something went wrong');
+      }
     }
   }
   if (!listing) {

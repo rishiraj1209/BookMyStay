@@ -25,7 +25,7 @@ export const createListing = async (req,res)=>{
 export const getListing = async (req,res)=>{
     try {
         const {id} = req.params;
-        const listing = await Listing.findById(id).populate('owner','name').populate({path:'reviews',populate:{path:'author',select:'name'},});
+        const listing = await Listing.findById(id).populate('owner').populate({path:'reviews',populate:{path:'author',select:'name'},});
         if(!listing){
             return res.status(404).json({message:"listing not found"});
         }
@@ -43,8 +43,7 @@ export const editListing = async (req,res)=>{
             return res.status(400).json({message:"please enter all fields to update"});
         }
         const editedListing = await Listing.findByIdAndUpdate(id, req.body, {new:true});
-        res.status(200).json({message:"listing updated successfully", listing:editedListing});
-
+        res.status(200).json({message:"listing updated successfully", listing:editedListing})
     }catch(error){
         res.status(500).json({error});
     }
