@@ -25,13 +25,13 @@ export const createListing = async (req,res)=>{
 export const getListing = async (req,res)=>{
     try {
         const {id} = req.params;
-        const listing = await Listing.findById(id);
+        const listing = await Listing.findById(id).populate('owner','name').populate({path:'reviews',populate:{path:'author',select:'name'},});
         if(!listing){
             return res.status(404).json({message:"listing not found"});
         }
         res.json(listing);
     }catch(error){
-        res.status(500).json({error});
+        res.status(500).json({msg:error.message});
     }
 }
 

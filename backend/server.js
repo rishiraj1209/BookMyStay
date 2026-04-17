@@ -4,7 +4,7 @@ import cors from 'cors';
 import cookieParser from 'cookie-parser';
 import connectDB from './configs/db.js';
 import userRouter from './routes/userRoutes.js';
-// import reviewRouter from './routes/reviewRoutes.js';
+import reviewRouter from './routes/reviewRoutes.js';
 import listingRouter from './routes/listingRoutes.js';
 
 
@@ -30,7 +30,7 @@ app.get('/',(req,res)=>{
 })
 
 app.use('/api/listings',listingRouter);
-// app.use('/api/listings/:id/reviews',reviewRouter);
+app.use('/api/listings/:id/reviews',reviewRouter);
 app.use('/api/auth',userRouter);
 
 

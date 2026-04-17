@@ -1,7 +1,17 @@
 import React from 'react'
 import {TentTree} from 'lucide-react'
+import API from '../api/axios'
 
 const Navbar = () => {
+
+  const handleLogout = async()=>{
+    try {
+      const res = await API.post('/auth/logout');
+      console.log(res);
+    } catch (error) {
+      console.log(error);
+    }
+  }
   return (
     <div className='fixed top-0 left-0 z-20 flex justify-between items-center h-20 w-full px-8 py-2 shadow-md bg-white'>
       <div className='flex gap-4 items-center'>
@@ -17,7 +27,7 @@ const Navbar = () => {
         <button className='rounded-lg px-4 py-1 bg-red-500 text-white font-medium cursor-pointer shadow-sm shadow-black active:shadow-none active:scale-99 transition-all duration-200'>Search Listings</button>
       </div>
       <div>
-        <button className='font-medium text-red-500 cursor-pointer text-lg flex items-center text-shadow-md'>Logout</button>
+        <button onClick={handleLogout} className='font-medium text-red-500 cursor-pointer text-lg flex items-center text-shadow-md'>Logout</button>
       </div>
     </div>
   )
