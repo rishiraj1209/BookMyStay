@@ -8,13 +8,16 @@ import Login from './pages/Login'
 import Signup from './pages/Signup'
 import Navbar from './components/Navbar'
 import Footer from './components/Footer'
+import { useState } from 'react'
 
 const App = () => {
+  const [search, setSearch] = useState("");
+  const [category, setCategory] = useState("");
   return (
     <div className='min-h-screen w-full '>
-      <Navbar/>
+      <Navbar search={search} setSearch={setSearch} category={category} setCategory={setCategory}/>
       <Routes>
-        <Route path='/' element={<Listings/>}/>
+        <Route path='/' element={<Listings search={search} category={category}/>}/>
         <Route path='/listings/:id' element={<Show/>}/>
         <Route path='/newListing' element={<NewListing/>}/>
         <Route path='/listings/:id/edit' element={<Edit/>}/>

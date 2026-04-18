@@ -1,6 +1,7 @@
 import React from 'react'
 import { useState } from 'react';
 import API from '../api/axios';
+import { Link } from 'react-router-dom';
 
 const Signup = () => {
   const [formData, setFormData] = useState({
@@ -52,6 +53,8 @@ const Signup = () => {
           <button className='bg-red-500 w-full py-2 px-8 rounded-md text-white font-medium cursor-pointer shadow-sm shadow-black active:scale-98 active:shadow-none transition-all duration-200' type="submit">Signup</button>
         </div>
       </form>
+
+      <p className='text-center mt-4 text-lg'>Already have an account ? <span className='text-red-500 font-medium'><Link to="/login">login</Link></span></p>
     </div>
   )
 }

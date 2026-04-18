@@ -33,7 +33,7 @@ const Show = () => {
     } catch (error) {
       console.log(error);
       if(error.response && error.response.status === 401){
-        navigate(`listings/${id}`);
+        navigate('/login');
       }else{
         alert('something went wrong');
       }
@@ -53,6 +53,14 @@ const Show = () => {
         comment:comment
       })
 
+      // set the reviews visible
+      setListing((prev)=>({
+        ...prev, reviews:[...(prev.reviews|| []), res.data.newReview]
+      }))
+
+      setRating(0);
+      setComment("");
+
       console.log(res);
     } catch (error) {
       console.log(error);
@@ -67,6 +75,7 @@ const Show = () => {
             <p className='text-lg max-w-2xl mt-4'>{listing.description}</p>
             <p className='text-xl font-semibold mt-4'>Price : ₹ {listing.price}</p>
             <p className='text-lg mt-4'><span>{listing.location}, </span> {listing.country}</p>
+            <p className='text-lg mt-4'>Category: {listing.category}</p>
           </div>
           <div className='flex gap-10 items-center px-2'>
             <button className='px-8 py-2 bg-green-500 rounded text-white font-medium'><Link to={`/listings/${listing._id}/edit`}>Edit</Link></button>

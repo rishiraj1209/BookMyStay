@@ -19,7 +19,7 @@ export const createReview = async (req, res) => {
         await newReview.save();
         await listing.save();
 
-        return res.status(201).json({ msg: 'Review added successfully' });
+        return res.status(201).json({newReview});
     } catch (error) {
         res.status(500).json(error);
     }

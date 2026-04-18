@@ -8,12 +8,14 @@ import { useState } from 'react'
 import API from '../api/axios'
 import { Link } from 'react-router-dom'
 
-const Listings = () => {
+const Listings = ({search,category}) => {
     const [allListings, setAllListings] = useState([]);
     useEffect(()=>{
         const getAllListings = async ()=>{
             try{
-                const response = await API.get('/listings');
+                const response = await API.get('/listings',{
+                    params: { search, category }
+                });
                 setAllListings(response.data);
             }catch(error){
                 console.log(error.message);
@@ -21,7 +23,7 @@ const Listings = () => {
         }
 
         getAllListings();
-    },[])
+    },[search,category])
 
   return (
     <div className='grid grid-cols-3 gap-8 mt-20 px-12 py-12 min-h-screen'>

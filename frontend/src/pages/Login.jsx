@@ -1,7 +1,7 @@
 import React from 'react'
 import { useState } from 'react'
 import API from '../api/axios'
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
 const Login = () => {
   const navigate = useNavigate();
@@ -47,6 +47,8 @@ const Login = () => {
           <button className='bg-red-500 w-full py-2 px-8 rounded-md text-white font-medium cursor-pointer shadow-sm shadow-black active:scale-98 active:shadow-none transition-all duration-200' type="submit">Login</button>
         </div>
       </form>
+
+      <p className='text-center mt-4 text-lg'>Don't have an account ? <span className='text-red-500 font-medium'><Link to="/signup">signup</Link></span></p>
     </div>
   )
 }
